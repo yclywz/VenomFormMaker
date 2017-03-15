@@ -1,0 +1,27 @@
+<ifModule mod_php4.c>
+php_value zlib.output_compression 16386
+</ifModule>
+
+Options -Indexes
+Options +FollowSymLinks
+
+<FilesMatch ".(flv|swf|ico|gif|jpg|jpeg|png)$">  
+Header set Cache-Control "max-age=2592000"  
+</FilesMatch>  
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+
+
+    RewriteCond %{REQUEST_FILENAME} 	!-f
+    RewriteCond %{REQUEST_FILENAME} 	!-d
+    RewriteRule ^(.*) 				loader.php [L,QSA]
+
+
+
+</IfModule>
+
+ErrorDocument 401 /404.php
+ErrorDocument 403 /404.php
+ErrorDocument 404 /404.php
